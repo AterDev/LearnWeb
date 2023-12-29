@@ -12,6 +12,8 @@ app.Map("/{name}", (string name) => "Hello " + name);
 // 使用控制器默认路由模板
 //app.MapDefaultControllerRoute();
 
+
 app.MapControllers();
+
 
 app.Run();

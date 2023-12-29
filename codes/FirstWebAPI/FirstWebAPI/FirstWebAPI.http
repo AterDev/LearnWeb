@@ -2,5 +2,57 @@
 
 GET {{FirstWebAPI_HostAddress}}/weatherforecast/
 Accept: application/json
-
 ###
+
+# Blog 控制器 模型绑定示例
+GET  {{FirstWebAPI_HostAddress}}/api/blog?count=1
+### 从query中获取参数
+
+GET  {{FirstWebAPI_HostAddress}}/api/blog/page
+pageIndex:1
+pageSize:12
+### 从header中获取参数 
+
+POST {{FirstWebAPI_HostAddress}}/api/blog
+Content-Type: application/x-www-form-urlencoded
+
+title=测试标题&content=测试内容&description=描述&createdTime=2020-01-01T00:00:00Z
+### 从form中获取参数
+
+POST {{FirstWebAPI_HostAddress}}/api/blog
+Content-Type: application/json
+
+{
+    "Title":"测试标题",
+    "Content":"测试内容",
+    "Description":"描述",
+    "CreatedTime":"2020-01-01T00:00:00Z"
+}
+### 从body中获取参数
+
+PUT {{FirstWebAPI_HostAddress}}/api/blog/1
+Content-Type: application/json
+
+{
+    "Title":"测试标题",
+    "Content":"测试内容",
+    "Description":"描述",
+    "CreatedTime":"2020-01-01T00:00:00Z"
+}
+### 从body中获取参数
+
+DELETE {{FirstWebAPI_HostAddress}}/api/blog/1
+
+### 
+
+POST {{FirstWebAPI_HostAddress}}/api/blog
+Content-Type: application/json
+
+{
+    "Title":"1",
+    "Content":"测试内容",
+    "Description":"描述",
+    "CreatedTime":"2020-01-01T00:00:00Z"
+}
+
+### 模型验证请求示例

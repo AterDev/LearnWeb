@@ -32,4 +32,16 @@ public class UserController : ControllerBase
         Console.WriteLine(password);
         return true;
     }
+
+    [HttpGet("login")]
+    public bool LoginWithoutParameters()
+    {
+        var username = Request.Query["username"];
+        var password = Request.Query["password"];
+        // 其他参数获取...
+
+        // TODO:业务逻辑实现
+        Console.WriteLine(username + password);
+        return true;
+    }
 }
