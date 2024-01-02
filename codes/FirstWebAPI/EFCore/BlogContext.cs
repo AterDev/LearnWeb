@@ -8,5 +8,4 @@ public class BlogContext(DbContextOptions<BlogContext> options) : DbContext(opti
     public DbSet<User> Users { get; set; }
     public DbSet<Blog> Blogs { get; set; }
 
-
 }

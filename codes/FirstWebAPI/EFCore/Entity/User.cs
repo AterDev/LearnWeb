@@ -13,5 +13,4 @@ public class User
 
     public ICollection<Blog> Blogs { get; set; } = [];
 
-
 }
