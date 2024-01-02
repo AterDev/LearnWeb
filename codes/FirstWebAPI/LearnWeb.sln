@@ -5,6 +5,8 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirstWebAPI", "FirstWebAPI\FirstWebAPI.csproj", "{A5D3DF22-90FD-4F28-A86B-D473FD1EF987}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCore", "EFCore\EFCore.csproj", "{3CB88F0E-464B-44E3-BFF2-CA8F1E8E809D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{A5D3DF22-90FD-4F28-A86B-D473FD1EF987}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5D3DF22-90FD-4F28-A86B-D473FD1EF987}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5D3DF22-90FD-4F28-A86B-D473FD1EF987}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CB88F0E-464B-44E3-BFF2-CA8F1E8E809D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CB88F0E-464B-44E3-BFF2-CA8F1E8E809D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CB88F0E-464B-44E3-BFF2-CA8F1E8E809D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CB88F0E-464B-44E3-BFF2-CA8F1E8E809D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
