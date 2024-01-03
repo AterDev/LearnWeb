@@ -1,6 +1,41 @@
 @EFCore_HostAddress = http://localhost:5285
 
-GET {{EFCore_HostAddress}}/weatherforecast/
-Accept: application/json
+
+
+GET {{EFCore_HostAddress}}/api/user
+
+###
+
+POST {{EFCore_HostAddress}}/api/user?userName=human
+
+###
+
+POST {{EFCore_HostAddress}}/api/user/blogs
+Content-Type: application/json
+
+{
+   "UserId": "cd793658-4333-4540-bb96-19c2d341e545",
+   "Title": "博客标题",
+   "Content": "内容",
+   "Tags":["标签1","标签2"]
+}
+
+###
+
+DELETE {{EFCore_HostAddress}}/api/user/blogs/{id}
+
+###
+
+PUT {{EFCore_HostAddress}}/api/user/blogs/{id}
+Content-Type: application/json
+
+{
+   "Title": "博客标题",
+   "Content": "内容"
+}
+
+###
+
+GET {{EFCore_HostAddress}}/api/user/blogs/{cd793658-4333-4540-bb96-19c2d341e545}
 
 ###

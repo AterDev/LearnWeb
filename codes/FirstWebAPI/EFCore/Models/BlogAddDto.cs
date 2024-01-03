@@ -1,16 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace EFCore.Entity;
+namespace EFCore.Models;
 
-/// <summary>
-/// 博客实体
-/// </summary>
-public class Blog
+public class BlogAddDto
 {
-    public Guid Id { get; set; }
-    /// <summary>
-    /// 标题
-    /// </summary>
     [Length(1, 30)]
     public required string Title { get; set; }
     /// <summary>
@@ -24,6 +17,4 @@ public class Blog
     public List<string>? Tags { get; set; }
 
     public required Guid UserId { get; set; }
-
-    public User User { get; set; } = null!;
 }

@@ -1,5 +1,7 @@
 ﻿using EFCore.Entity;
+using EFCore.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace EFCore.Controllers;
 
@@ -11,73 +13,96 @@ public class UserController(BlogContext context) : ControllerBase
 
     // 用户的添加
     [HttpPost]
-    public IActionResult AddUser(User user)
+    public async Task<ActionResult<User>> AddUserAsync(string userName)
     {
+        var exist = await _context.Users.AnyAsync(x => x.Name == userName);
+        if (exist)
+        {
+            return Conflict("用户名已经存在");
+        }
+
+        var user = new User
+        {
+            Name = userName,
+            Id = Guid.NewGuid()
+        };
         _context.Users.Add(user);
-        _context.SaveChanges();
-        return Ok();
+        await _context.SaveChangesAsync();
+        return user;
     }
 
     // 用户列表的查询
     [HttpGet]
-    public IActionResult GetUsers()
+    public async Task<List<User>> GetUsersAsync()
     {
-        var users = _context.Users.ToList();
-        return Ok(users);
+        return await _context.Users.ToListAsync() ?? [];
+    }
+
+    // 博客搜索
+    [HttpGet("blogs/{userId}")]
+    public async Task<List<Blog>> GetBlogsAsync(Guid userId, string? title, string? tag)
+    {
+        var query = _context.Blogs.Where(x => x.UserId == userId).AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(title))
+        {
+            query = query.Where(x => x.Title.Contains(title));
+        }
+        if (!string.IsNullOrWhiteSpace(tag))
+        {
+            query = query.Where(x => x.Tags != null && x.Tags.Contains(tag));
+        }
+
+        return await query.ToListAsync() ?? [];
     }
 
     // 博客的添加
     [HttpPost("blogs")]
-    public IActionResult AddBlog(Blog blog)
+    public async Task<Blog> AddBlogAsync(BlogAddDto dto)
     {
+        var blog = new Blog
+        {
+            Title = dto.Title,
+            Content = dto.Content,
+            UserId = dto.UserId,
+            Tags = dto.Tags,
+            Id = Guid.NewGuid()
+        };
         _context.Blogs.Add(blog);
-        _context.SaveChanges();
-        return Ok();
+        await _context.SaveChangesAsync();
+        return blog;
     }
 
     // 博客的修改
     [HttpPut("blogs/{id}")]
-    public IActionResult UpdateBlog(Guid id, Blog updatedBlog)
+    public async Task<ActionResult<Blog>> UpdateBlogAsync(Guid id, BlogUpdateDto dto)
     {
-        var blog = _context.Blogs.FirstOrDefault(b => b.Id == id);
+        var blog = await _context.Blogs.FindAsync(id);
         if (blog == null)
         {
             return NotFound();
         }
 
-        blog.Title = updatedBlog.Title;
-        blog.Content = updatedBlog.Content;
-        _context.SaveChanges();
-        return Ok();
+        if (dto.Title != null) { blog.Title = dto.Title; }
+        if (dto.Content != null) { blog.Content = dto.Content; }
+        if (dto.Tags != null) { blog.Tags = dto.Tags; }
+
+        await _context.SaveChangesAsync();
+        return blog;
     }
 
     // 博客的删除
     [HttpDelete("blogs/{id}")]
-    public IActionResult DeleteBlog(Guid id)
+    public async Task<ActionResult> DeleteBlogAsync(Guid id)
     {
-        var blog = _context.Blogs.FirstOrDefault(b => b.Id == id);
+        var blog = await _context.Blogs.FindAsync(id);
         if (blog == null)
         {
             return NotFound();
         }
 
         _context.Blogs.Remove(blog);
-        _context.SaveChanges();
-        return Ok();
-    }
-
-    // 博客标签的修改
-    [HttpPut("blogs/{id}/tags")]
-    public IActionResult UpdateBlogTags(Guid id, List<string> tags)
-    {
-        var blog = _context.Blogs.FirstOrDefault(b => b.Id == id);
-        if (blog == null)
-        {
-            return NotFound();
-        }
-
-        blog.Tags = tags;
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
         return Ok();
     }
 }
