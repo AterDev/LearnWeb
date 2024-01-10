@@ -30,10 +30,10 @@ public class InitDataTask
                     await InitUserAsync(context, configuration, logger);
                 }
                 // 初始化管理员信息
-                //var systemUserManager = provider.GetRequiredService<SystemMod.Manager.SystemUserManager>();
-                //await systemUserManager.InitSystemUserAndRoleAsync();
-                //var systemConfigManager = provider.GetRequiredService<SystemMod.Manager.SystemConfigManager>();
-                //await systemConfigManager.UpdateVersionAsync();
+                var systemUserManager = provider.GetRequiredService<SystemMod.Manager.SystemUserManager>();
+                await systemUserManager.InitSystemUserAndRoleAsync();
+                var systemConfigManager = provider.GetRequiredService<SystemMod.Manager.SystemConfigManager>();
+                await systemConfigManager.UpdateVersionAsync();
             }
         }
         catch (Exception)
