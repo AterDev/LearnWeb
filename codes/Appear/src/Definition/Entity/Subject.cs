@@ -36,6 +36,11 @@ public class Subject : IEntityBase
     /// 选项
     /// </summary>
     public ICollection<SubjectOption> SubjectOptions { get; set; } = [];
+
+    /// <summary>
+    /// 投票规则
+    /// </summary>
+    public SubjectRule SubjectRule { get; set; } = null!;
 }
 
 public enum SubjectType

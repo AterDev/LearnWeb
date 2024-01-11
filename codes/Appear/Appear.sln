@@ -31,9 +31,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{171177E5-1
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microservice", "Microservice", "{D484E244-0AF0-455A-9F2C-8A04CE46AA5A}"
-	ProjectSection(SolutionItems) = preProject
-		src\Microservice\README.md = src\Microservice\README.md
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{FF4255E1-DD92-4795-ADD0-A44872A1EDC2}"
 EndProject

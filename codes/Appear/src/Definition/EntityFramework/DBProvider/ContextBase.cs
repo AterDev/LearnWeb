@@ -14,12 +14,24 @@ public partial class ContextBase(DbContextOptions options) : DbContext(options)
     public DbSet<SystemRole> SystemRoles { get; set; }
     public DbSet<SystemUser> SystemUsers { get; set; }
 
+    public DbSet<Subject> Subjects { get; set; }
+    public DbSet<SubjectOption> SubjectOptions { get; set; }
+    public DbSet<VoteRecord> VoteRecords { get; set; }
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
-
         base.OnModelCreating(builder);
         OnModelExtendCreating(builder);
+
+        builder.Entity<Subject>(e =>
+        {
+            e.OwnsOne(e => e.SubjectRule, builder =>
+            {
+                builder.ToJson();
+            });
+        });
     }
+
     public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
     {
         var entries = ChangeTracker.Entries().Where(e => e.State == EntityState.Added).ToList();
