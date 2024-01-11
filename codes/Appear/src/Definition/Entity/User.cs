@@ -11,8 +11,6 @@ namespace Entity;
 [Index(nameof(IsDeleted))]
 public class User : IEntityBase
 {
-    // TODO:根据实际需求调整字段
-
     /// <summary>
     /// 用户名
     /// </summary>
@@ -63,7 +61,7 @@ public class User : IEntityBase
     public bool IsDeleted { get; set; }
 
     #region 用户关联内容
-
+    public ICollection<VoteRecord> VoteRecords { get; set; } = [];
     #endregion
 }
 public enum UserType
