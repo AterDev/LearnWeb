@@ -21,3 +21,4 @@ global using Microsoft.EntityFrameworkCore;
 global using Microsoft.Extensions.DependencyInjection;
 
 global using Share.Options;
+global using Ater.Web.Abstraction;
