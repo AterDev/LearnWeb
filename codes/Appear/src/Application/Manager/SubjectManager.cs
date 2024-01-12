@@ -1,4 +1,3 @@
-using Application.Manager;
 using Share.Models.SubjectDtos;
 
 namespace Application.Manager;
@@ -6,7 +5,7 @@ namespace Application.Manager;
 /// 主题
 /// </summary>
 public class SubjectManager(
-    DataAccessContext<Subject> dataContext, 
+    DataAccessContext<Subject> dataContext,
     ILogger<SubjectManager> logger,
     IUserContext userContext) : ManagerBase<Subject, SubjectUpdateDto, SubjectFilterDto, SubjectItemDto>(dataContext, logger)
 {
@@ -56,9 +55,7 @@ public class SubjectManager(
     {
         Queryable = Queryable
             .WhereNotNull(filter.Name, q => q.Name == filter.Name)
-            .WhereNotNull(filter.SubjectType, q => q.SubjectType == filter.SubjectType)
-            .WhereNotNull(filter.SubjectRule, q => q.SubjectRule == filter.SubjectRule);
-        // TODO: custom filter conditions
+            .WhereNotNull(filter.SubjectType, q => q.SubjectType == filter.SubjectType);
         return await Query.FilterAsync<SubjectItemDto>(Queryable, filter.PageIndex, filter.PageSize, filter.OrderBy);
     }
 

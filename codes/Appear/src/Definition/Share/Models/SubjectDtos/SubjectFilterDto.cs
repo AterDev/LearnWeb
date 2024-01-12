@@ -17,9 +17,4 @@ public class SubjectFilterDto : FilterBase
     /// 结束日期
     /// </summary>
     public DateOnly? EndDate { get; set; }
-    /// <summary>
-    /// 投票规则
-    /// </summary>
-    public SubjectRule? SubjectRule { get; set; }
-    
 }
