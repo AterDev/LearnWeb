@@ -1,4 +1,3 @@
-using Entity;
 namespace Share.Models.SubjectDtos;
 /// <summary>
 /// 主题概要
@@ -17,9 +16,5 @@ public class SubjectShortDto
     /// 结束日期
     /// </summary>
     public DateOnly EndDate { get; set; }
-    /// <summary>
-    /// 投票规则
-    /// </summary>
-    public SubjectRule SubjectRule { get; set; } = default!;
-    
+
 }

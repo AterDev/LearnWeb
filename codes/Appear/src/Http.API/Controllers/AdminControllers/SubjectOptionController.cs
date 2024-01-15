@@ -14,7 +14,6 @@ public class SubjectOptionController(
 {
     private readonly SubjectManager _subjectManager = subjectManager;
 
-
     /// <summary>
     /// 筛选
     /// </summary>

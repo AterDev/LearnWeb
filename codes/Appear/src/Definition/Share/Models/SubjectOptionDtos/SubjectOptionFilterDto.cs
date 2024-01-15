@@ -7,14 +7,4 @@ namespace Share.Models.SubjectOptionDtos;
 public class SubjectOptionFilterDto : FilterBase
 {
     public Guid? SubjectId { get; set; }
-    /// <summary>
-    /// 内容
-    /// </summary>
-    [Length(2, 200)]
-    public string? Content { get; set; }
-    /// <summary>
-    /// 投票数量
-    /// </summary>
-    public int? Count { get; set; }
-    
 }

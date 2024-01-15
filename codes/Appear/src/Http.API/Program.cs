@@ -1,11 +1,9 @@
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
-
-using Ater.Web.Abstraction;
-
+using Appear.ServiceDefaults;
 using Http.API;
 using Http.API.Worker;
-using Appear.ServiceDefaults;
+using SystemMod;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -29,7 +27,7 @@ services.AddTransient<ITenantProvider, TenantProvider>();
 // 3 数据及业务接口注入
 services.AddManager();
 // 其他模块Manager
-//services.AddSystemModManagers();
+services.AddSystemModManagers();
 
 // 4 其他自定义选项及服务
 services.AddSingleton(typeof(CacheService));

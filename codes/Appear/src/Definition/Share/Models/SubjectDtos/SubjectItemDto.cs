@@ -1,4 +1,3 @@
-using Entity;
 namespace Share.Models.SubjectDtos;
 /// <summary>
 /// 主题列表元素
@@ -6,8 +5,8 @@ namespace Share.Models.SubjectDtos;
 /// <see cref="Entity.Subject"/>
 public class SubjectItemDto
 {
+    public Guid Id { get; set; }
     public DateTimeOffset CreatedTime { get; set; }
-    [Length(2, 30)]
     public string Name { get; set; } = default!;
     public SubjectType SubjectType { get; set; }
     /// <summary>
@@ -18,9 +17,4 @@ public class SubjectItemDto
     /// 结束日期
     /// </summary>
     public DateOnly EndDate { get; set; }
-    /// <summary>
-    /// 投票规则
-    /// </summary>
-    public SubjectRule SubjectRule { get; set; } = default!;
-    
 }
