@@ -1,16 +1,32 @@
 ﻿@inherits LayoutComponentBase
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+@inject NavigationManager NavigationManager
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-        </div>
-
-        <article class="content px-4">
+<FluentLayout>
+    <FluentHeader>
+        Appear
+        <FluentSpacer />
+        <FluentNavLink Icon="@(new Icons.Regular.Size24.PersonAccounts())" Href="./login" OnClick='()=>JumpTo("./login")'>登录</FluentNavLink>
+    </FluentHeader>
+    <FluentStack Orientation="Orientation.Horizontal" Width="100%">
+        <FluentNavMenu Width="250">
+            <FluentNavLink Icon="@(new Icons.Regular.Size24.Home())" Href="./">首页</FluentNavLink>
+        </FluentNavMenu>
+        <FluentBodyContent>
             @Body
-        </article>
-    </main>
-</div>
+        </FluentBodyContent>
+    </FluentStack>
+
+    <FluentFooter>
+        Blazor
+    </FluentFooter>
+</FluentLayout>
+<FluentMessageBarProvider Section="MESSAGES_TOP"/>
+<FluentToastProvider MaxToastCount="10" />
+
+
+@code {
+    public void JumpTo(string url)
+    {
+        NavigationManager.NavigateTo(url);
+    }
+}
