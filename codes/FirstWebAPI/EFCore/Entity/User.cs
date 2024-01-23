@@ -13,4 +13,6 @@ public class User
 
     public ICollection<Blog> Blogs { get; set; } = [];
 
+    public DateTimeOffset CreatedTime { get; set; } = DateTimeOffset.UtcNow;
+
 }
