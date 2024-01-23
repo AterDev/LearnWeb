@@ -5,14 +5,9 @@ namespace Example.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class FileController : ControllerBase
+public class FileController(IWebHostEnvironment environment) : ControllerBase
 {
-    private readonly IWebHostEnvironment _env;
-
-    public FileController(IWebHostEnvironment environment)
-    {
-        _env = environment;
-    }
+    private readonly IWebHostEnvironment _env = environment;
 
     [HttpGet("stream")]
     public async Task DownloadStreamAsync()
@@ -45,22 +40,19 @@ public class FileController : ControllerBase
 
             if (fileExt == null)
             {
-                ModelState.AddModelError("file", "上传的文件没有后缀");
-                return BadRequest(ModelState);
+                return Problem("上传的文件没有后缀");
             }
             if (!permittedExtensions.Contains(fileExt))
             {
-                ModelState.AddModelError("file", "不支持的图片格式");
-                return BadRequest(ModelState);
+                return Problem("请上传jpg、png格式的图片");
             }
             if (fileSize > 1024 * 500 * 1)
             {
-                // 上传的文件不能大于1M
-                ModelState.AddModelError("file", "上传的文件不能大于1M");
-                return BadRequest(ModelState);
+                //上传的文件不能大于1M
+                return Problem("上传的图片应小于500KB");
             }
             // TODO:保存文件
-            var path = Path.Combine(_env.WebRootPath, file.Name);
+            var path = Path.Combine(_env.ContentRootPath, file.FileName);
             using (var fileStream = System.IO.File.Create(path))
             {
                 await file.OpenReadStream().CopyToAsync(fileStream);
