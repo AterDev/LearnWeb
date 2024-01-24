@@ -1,4 +1,8 @@
-﻿<Router AppAssembly="@typeof(App).Assembly">
+﻿@inject NavigationManager Navigation
+@inject ILogger<App> Logger
+
+<Router AppAssembly="@typeof(App).Assembly"
+        OnNavigateAsync="@OnNavigateAsync">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
         <FocusOnNavigate RouteData="@routeData" Selector="h1" />
@@ -10,3 +14,22 @@
         </LayoutView>
     </NotFound>
 </Router>
+
+
+@code {
+    private async Task OnNavigateAsync(NavigationContext context)
+    {
+        string[] publicPath = ["login", "register"];
+
+        Logger.LogInformation(context.Path);
+        if (publicPath.Any(path => context.Path.StartsWith(path)) || context.Path == "")
+        {
+            Logger.LogInformation(context.Path);
+        }
+        else
+        {
+            Navigation.NavigateTo("/login");
+        }
+        await Task.CompletedTask;
+    }
+}
