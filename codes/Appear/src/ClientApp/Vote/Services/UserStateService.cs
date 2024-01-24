@@ -10,12 +10,12 @@ public class UserStateService
 
     public bool IsLogin { get; set; }
 
-    private readonly ILocalStorageService _storageService;
+    private readonly ISyncLocalStorageService _storageService;
 
-    public UserStateService(ILocalStorageService storageService)
+    public UserStateService(ISyncLocalStorageService storageService)
     {
         _storageService = storageService;
-        GetUserStateAsync().Wait();
+        GetUserState();
     }
 
     public void SetUserState(Guid userId, string username)
@@ -24,14 +24,14 @@ public class UserStateService
         UserId = userId;
         UserName = username;
 
-        _storageService.SetItemAsync("UserId", UserId);
-        _storageService.SetItemAsync("UserName", UserName);
+        _storageService.SetItem<Guid>("UserId", UserId);
+        _storageService.SetItem("UserName", UserName);
     }
 
-    public async Task GetUserStateAsync()
+    public void GetUserState()
     {
-        var username = await _storageService.GetItemAsStringAsync("UserName");
-        var userId = await _storageService.GetItemAsync<Guid>("UserId");
+        var username = _storageService.GetItemAsString("UserName");
+        var userId = _storageService.GetItem<Guid>("UserId");
 
         if (userId != Guid.Empty && !string.IsNullOrWhiteSpace(username))
         {
@@ -39,5 +39,10 @@ public class UserStateService
             UserName = username;
             IsLogin = true;
         }
+    }
+
+    public void ClearUserStateAsync()
+    {
+        _storageService.Clear();
     }
 }

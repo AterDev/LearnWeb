@@ -1,5 +1,6 @@
 ﻿@inject NavigationManager Navigation
 @inject ILogger<App> Logger
+@inject UserStateService UserStateService
 
 <Router AppAssembly="@typeof(App).Assembly"
         OnNavigateAsync="@OnNavigateAsync">
@@ -15,21 +16,24 @@
     </NotFound>
 </Router>
 
-
 @code {
-    private async Task OnNavigateAsync(NavigationContext context)
-    {
-        string[] publicPath = ["login", "register"];
+    private string[] publicPath = ["login", "register"];
 
-        Logger.LogInformation(context.Path);
-        if (publicPath.Any(path => context.Path.StartsWith(path)) || context.Path == "")
+    private void OnNavigateAsync(NavigationContext context)
+    {
+        Navigation.LocationChanged += HandleLocationChanged;
+    }
+
+    private void HandleLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        var route = Navigation.Uri.Replace(Navigation.BaseUri, "");
+        if (publicPath.Any(path => route.StartsWith(path)) || route == "")
         {
-            Logger.LogInformation(context.Path);
+            Logger.LogInformation(route);
         }
         else
         {
             Navigation.NavigateTo("/login");
         }
-        await Task.CompletedTask;
     }
 }
