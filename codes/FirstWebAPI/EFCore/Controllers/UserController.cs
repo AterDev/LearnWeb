@@ -1,5 +1,6 @@
 ﻿using EFCore.Entity;
 using EFCore.Models;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,7 +16,7 @@ public class UserController(BlogContext context) : ControllerBase
     [HttpPost]
     public async Task<ActionResult<User>> AddUserAsync(string userName)
     {
-        var exist = await _context.Users.AnyAsync(x => x.Name == userName);
+        var exist = await _context.Users.AnyAsync(u => u.Name == userName);
         if (exist)
         {
             return Conflict("用户名已经存在");
@@ -27,14 +28,20 @@ public class UserController(BlogContext context) : ControllerBase
             Id = Guid.NewGuid()
         };
         _context.Users.Add(user);
+
         await _context.SaveChangesAsync();
         return user;
     }
 
     // 用户列表的查询
     [HttpGet]
-    public async Task<List<User>> GetUsersAsync()
+    public async Task<List<User>> GetUsersAsync(string? name)
     {
+        if (!string.IsNullOrWhiteSpace(name))
+        {
+            return await _context.Users.Where(x => x.Name.Equals(name)).ToListAsync() ?? [];
+        }
+
         return await _context.Users.ToListAsync() ?? [];
     }
 
@@ -58,8 +65,14 @@ public class UserController(BlogContext context) : ControllerBase
 
     // 博客的添加
     [HttpPost("blogs")]
-    public async Task<Blog> AddBlogAsync(BlogAddDto dto)
+    public async Task<ActionResult<Blog>> AddBlogAsync(BlogAddDto dto)
     {
+        var exist = await _context.Users.AnyAsync(u => u.Id == dto.UserId);
+        if (!exist)
+        {
+            return Problem("用户不存在");
+        }
+
         var blog = new Blog
         {
             Title = dto.Title,
@@ -77,7 +90,8 @@ public class UserController(BlogContext context) : ControllerBase
     [HttpPut("blogs/{id}")]
     public async Task<ActionResult<Blog>> UpdateBlogAsync(Guid id, BlogUpdateDto dto)
     {
-        var blog = await _context.Blogs.FindAsync(id);
+        var userId = Guid.NewGuid();
+        var blog = await _context.Blogs.Where(b => b.UserId == userId && b.Id == id).FirstOrDefaultAsync();
         if (blog == null)
         {
             return NotFound();
@@ -93,16 +107,15 @@ public class UserController(BlogContext context) : ControllerBase
 
     // 博客的删除
     [HttpDelete("blogs/{id}")]
-    public async Task<ActionResult> DeleteBlogAsync(Guid id)
+    public async Task<ActionResult<bool>> DeleteBlogAsync(Guid id)
     {
-        var blog = await _context.Blogs.FindAsync(id);
-        if (blog == null)
+        // any 查询 是否存在
+        var exist = await _context.Blogs.AnyAsync(b => b.Id == id);
+        if (!exist)
         {
             return NotFound();
         }
-
-        _context.Blogs.Remove(blog);
-        await _context.SaveChangesAsync();
-        return Ok();
+        int res = await _context.Blogs.Where(x => x.Id == id).ExecuteDeleteAsync();
+        return res > 0;
     }
 }

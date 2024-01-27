@@ -6,7 +6,7 @@ GET {{EFCore_HostAddress}}/api/user
 
 ###
 
-POST {{EFCore_HostAddress}}/api/user?userName=human
+POST {{EFCore_HostAddress}}/api/user?userName=dev
 
 ###
 
@@ -14,28 +14,28 @@ POST {{EFCore_HostAddress}}/api/user/blogs
 Content-Type: application/json
 
 {
-   "UserId": "cd793658-4333-4540-bb96-19c2d341e545",
+   "UserId": "0ce19481-6ed4-4dd2-a22f-3f1148ef6ee3",
    "Title": "博客标题",
    "Content": "内容",
-   "Tags":["标签1","标签2"]
+   "Tags":["标签2","标签3"]
 }
 
 ###
 
-DELETE {{EFCore_HostAddress}}/api/user/blogs/{id}
+DELETE {{EFCore_HostAddress}}/api/user/blogs/93705349-33f4-4e79-80d1-25f1e67a9095
 
 ###
 
-PUT {{EFCore_HostAddress}}/api/user/blogs/{id}
+PUT {{EFCore_HostAddress}}/api/user/blogs/93705349-33f4-4e79-80d1-25f1e67a9095
 Content-Type: application/json
 
 {
-   "Title": "博客标题",
-   "Content": "内容"
+   "Title": "再次更新的博客标题"
+   
 }
 
 ###
 
-GET {{EFCore_HostAddress}}/api/user/blogs/{cd793658-4333-4540-bb96-19c2d341e545}
+GET {{EFCore_HostAddress}}/api/user/blogs/0ce19481-6ed4-4dd2-a22f-3f1148ef6ee3
 
 ###
