@@ -1,4 +1,3 @@
-using Entity;
 namespace Share.Models.SubjectDtos;
 /// <summary>
 /// 主题更新时请求结构
@@ -19,10 +18,4 @@ public class SubjectUpdateDto
     /// 结束日期
     /// </summary>
     public DateOnly? EndDate { get; set; }
-    /// <summary>
-    /// 投票规则
-    /// </summary>
-    public SubjectRule? SubjectRule { get; set; }
-    public List<Guid>? SubjectOptionIds { get; set; }
-    
 }

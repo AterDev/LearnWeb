@@ -22,14 +22,6 @@ public partial class ContextBase(DbContextOptions options) : DbContext(options)
     {
         base.OnModelCreating(builder);
         OnModelExtendCreating(builder);
-
-        builder.Entity<Subject>(e =>
-        {
-            e.OwnsOne(e => e.SubjectRule, builder =>
-            {
-                builder.ToJson();
-            });
-        });
     }
 
     public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)

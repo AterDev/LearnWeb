@@ -1,0 +1,39 @@
+﻿@inject NavigationManager Navigation
+@inject ILogger<App> Logger
+@inject UserStateService UserStateService
+
+<Router AppAssembly="@typeof(App).Assembly"
+        OnNavigateAsync="@OnNavigateAsync">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+        <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+    </Found>
+    <NotFound>
+        <PageTitle>Not found</PageTitle>
+        <LayoutView Layout="@typeof(MainLayout)">
+            <p role="alert">Sorry, there's nothing at this address.</p>
+        </LayoutView>
+    </NotFound>
+</Router>
+
+@code {
+    private string[] publicPath = ["login", "register"];
+
+    private void OnNavigateAsync(NavigationContext context)
+    {
+        Navigation.LocationChanged += HandleLocationChanged;
+    }
+
+    private void HandleLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        var route = Navigation.Uri.Replace(Navigation.BaseUri, "");
+        if (publicPath.Any(path => route.StartsWith(path)) || route == "")
+        {
+            Logger.LogInformation(route);
+        }
+        else
+        {
+            Navigation.NavigateTo("/login");
+        }
+    }
+}

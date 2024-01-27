@@ -14,9 +14,4 @@ public class SubjectOptionUpdateDto
     public string? Content { get; set; }
     [MaxLength(2000)]
     public string? Detail { get; set; }
-    /// <summary>
-    /// 投票数量
-    /// </summary>
-    public int? Count { get; set; }
-    
 }

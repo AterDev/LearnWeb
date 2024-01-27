@@ -12,9 +12,8 @@ public class SubjectController(
     ) : RestControllerBase<SubjectManager>(manager, user, logger)
 {
 
-
     /// <summary>
-    /// 筛选
+    /// 筛选 ✅
     /// </summary>
     /// <param name="filter"></param>
     /// <returns></returns>
@@ -25,7 +24,7 @@ public class SubjectController(
     }
 
     /// <summary>
-    /// 新增
+    /// 新增 ✅
     /// </summary>
     /// <param name="dto"></param>
     /// <returns></returns>
@@ -37,7 +36,7 @@ public class SubjectController(
     }
 
     /// <summary>
-    /// 部分更新
+    /// 部分更新 ✅
     /// </summary>
     /// <param name="id"></param>
     /// <param name="dto"></param>
@@ -51,7 +50,7 @@ public class SubjectController(
     }
 
     /// <summary>
-    /// 详情
+    /// 详情 ✅
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
@@ -63,7 +62,7 @@ public class SubjectController(
     }
 
     /// <summary>
-    /// ⚠删除
+    /// 删除 ✅
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>

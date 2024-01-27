@@ -1,0 +1,33 @@
+﻿@Http.API_HostAddress = http://localhost:5002
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImY5MjkyOTFjLTZkZmYtNDdiNi1iZDc3LTE5OGEwOWU4ZDY0YiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJBZG1pblVzZXIiLCJTdXBlckFkbWluIl0sImV4cCI6MTcwNTM3NjM2NCwiaXNzIjoiQXBwZWFyLkh1bWFuRnJlZWRvbS5EZWZhdWx0IiwiYXVkIjoiQXBwZWFyLkFsbEZyZWVkb21QZW9wbGUuRGVmYXVsdCJ9.EXB_c1lxJsTMIjrxGwfN26bg5CDHSGVjGuE5LkwP3MQ
+
+PUT {{Http.API_HostAddress}}/api/admin/systemuser/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "Hello.Net"
+}
+
+###
+
+POST {{Http.API_HostAddress}}/api/admin/user/filter
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+   "pageIndex": 1,
+   "pageSize": 12
+}
+###
+
+POST {{Http.API_HostAddress}}/api/admin/subject/filter
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "pageIndex": 0,
+  "pageSize": 12
+}
+
+###

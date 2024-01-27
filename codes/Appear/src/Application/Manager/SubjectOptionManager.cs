@@ -1,4 +1,3 @@
-using Application.Manager;
 using Share.Models.SubjectOptionDtos;
 
 namespace Application.Manager;
@@ -6,7 +5,7 @@ namespace Application.Manager;
 /// 主题选项
 /// </summary>
 public class SubjectOptionManager(
-    DataAccessContext<SubjectOption> dataContext, 
+    DataAccessContext<SubjectOption> dataContext,
     ILogger<SubjectOptionManager> logger,
     IUserContext userContext) : ManagerBase<SubjectOption, SubjectOptionUpdateDto, SubjectOptionFilterDto, SubjectOptionItemDto>(dataContext, logger)
 {
@@ -35,8 +34,29 @@ public class SubjectOptionManager(
     {
         Queryable = Queryable
             .WhereNotNull(filter.SubjectId, q => q.Subject.Id == filter.SubjectId);
-        // TODO: custom filter conditions
         return await Query.FilterAsync<SubjectOptionItemDto>(Queryable, filter.PageIndex, filter.PageSize, filter.OrderBy);
+    }
+
+    /// <summary>
+    /// 投票
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public async Task<bool> VoteOptionAsync(Guid id)
+    {
+        var option = await GetCurrentAsync(id);
+        if (option == null) { return false; }
+
+        option.Count++;
+
+        var record = new VoteRecord
+        {
+            SubjectOptionId = id,
+            UserId = _userContext.UserId
+        };
+
+        CommandContext.Add(record);
+        return await CommandContext.SaveChangesAsync() > 0;
     }
 
     /// <summary>

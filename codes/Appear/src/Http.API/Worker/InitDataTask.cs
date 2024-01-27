@@ -36,9 +36,9 @@ public class InitDataTask
                 await systemConfigManager.UpdateVersionAsync();
             }
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            logger.LogError("初始化异常,请检查数据库配置：{message}", connectionString);
+            logger.LogError("初始化异常,请检查数据库配置：{message}", ex.Message);
         }
     }
 

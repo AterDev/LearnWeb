@@ -15,6 +15,7 @@ public class Subject : IEntityBase
     public bool IsDeleted { get; set; }
 
     [Length(2, 30)]
+    [MaxLength(30)]
     public required string Name { get; set; }
 
     [MaxLength(2000)]
@@ -36,11 +37,6 @@ public class Subject : IEntityBase
     /// 选项
     /// </summary>
     public ICollection<SubjectOption> SubjectOptions { get; set; } = [];
-
-    /// <summary>
-    /// 投票规则
-    /// </summary>
-    public SubjectRule SubjectRule { get; set; } = null!;
 }
 
 public enum SubjectType

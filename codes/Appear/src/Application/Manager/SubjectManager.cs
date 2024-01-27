@@ -36,26 +36,28 @@ public class SubjectManager(
 
     public override async Task<Subject> UpdateAsync(Subject entity, SubjectUpdateDto dto)
     {
-        /*
-        if (dto.SubjectOptionIds != null && dto.SubjectOptionIds.Count > 0)
-        {
-            var subjectOptions = await CommandContext.SubjectOptions()
-                .Where(t => dto.SubjectOptionIds.Contains(t.Id))
-                .ToListAsync();
-            if (subjectOptions != null)
-            {
-                entity.SubjectOptions = subjectOptions;
-            }
-        }
-        */
         return await base.UpdateAsync(entity, dto);
     }
+
+    //public override Task<Subject?> FindAsync(Guid id)
+    //{
+    //    return Query.Db.AsNoTracking()
+    //        .Where(q => q.Id == id)
+    //        .Include(q => q.SubjectOptions)
+    //        .FirstOrDefaultAsync();
+    //}
 
     public override async Task<PageList<SubjectItemDto>> FilterAsync(SubjectFilterDto filter)
     {
         Queryable = Queryable
             .WhereNotNull(filter.Name, q => q.Name == filter.Name)
             .WhereNotNull(filter.SubjectType, q => q.SubjectType == filter.SubjectType);
+
+        if (filter.StartDate != null && filter.EndDate != null)
+        {
+            Queryable = Queryable.Where(q => q.StartDate >= filter.StartDate && q.EndDate <= filter.EndDate);
+        }
+
         return await Query.FilterAsync<SubjectItemDto>(Queryable, filter.PageIndex, filter.PageSize, filter.OrderBy);
     }
 
