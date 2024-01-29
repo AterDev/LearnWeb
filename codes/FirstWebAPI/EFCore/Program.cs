@@ -1,4 +1,5 @@
 using EFCore;
+
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+
 builder.Services.AddDbContext<BlogContext>(options =>
     options.UseNpgsql("Server=localhost;Port=5432;Database=EFCore;User Id=postgres;Password=root;"));
 
