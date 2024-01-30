@@ -8,3 +8,7 @@
 
 - [bilibili](https://space.bilibili.com/3493085797419759/channel/collectiondetail?sid=2140010)
 - Youtube：暂无
+
+## 学英语网站
+
+[TypingLearn](https://typinglearn.cn)
