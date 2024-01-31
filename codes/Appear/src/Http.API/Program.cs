@@ -1,13 +1,10 @@
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
-using Appear.ServiceDefaults;
 using Http.API;
 using Http.API.Worker;
 using SystemMod;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-
-builder.AddServiceDefaults();
 IServiceCollection services = builder.Services;
 ConfigurationManager configuration = builder.Configuration;
 
@@ -48,7 +45,6 @@ services.AddControllers()
 
 WebApplication app = builder.Build();
 
-app.MapDefaultEndpoints();
 if (app.Environment.IsDevelopment())
 {
     app.UseCors("default");

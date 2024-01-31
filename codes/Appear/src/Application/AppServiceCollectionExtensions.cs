@@ -1,6 +1,11 @@
 ﻿using EntityFramework.DBProvider;
 
 using Microsoft.Extensions.Configuration;
+using OpenTelemetry.Exporter;
+using OpenTelemetry.Logs;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 
 namespace Application;
 
@@ -37,6 +42,15 @@ public static partial class AppServiceCollectionExtensions
     {
         services.AddPgsqlDbContext(configuration);
         services.AddRedisCache(configuration);
+
+        var otlpEndpoint = configuration.GetSection("OTLP")
+            .GetValue<string>("Endpoint")
+            ?? "http://localhost:4317";
+        services.AddOpenTelemetry("Test-Exception", opt =>
+        {
+            opt.Endpoint = new Uri(otlpEndpoint);
+            opt.Headers = "Authorization=Bearer OpenTelemetry";
+        });
         return services;
     }
 
@@ -98,5 +112,72 @@ public static partial class AppServiceCollectionExtensions
             })
             : services.AddDistributedMemoryCache();
 
+    }
+
+    /// <summary>
+	/// 添加 OpenTelemetry 服务及选项
+	/// </summary>
+	/// <param name="services"></param>
+	/// <param name="serviceName"></param>
+	/// <param name="otlpOptions"></param>
+	/// <param name="loggerOptions"></param>
+	/// <param name="tracerProvider"></param>
+	/// <param name="meterProvider"></param>
+	public static IServiceCollection AddOpenTelemetry(this IServiceCollection services,
+        string serviceName,
+        Action<OtlpExporterOptions> otlpOptions,
+        Action<OpenTelemetryLoggerOptions>? loggerOptions = null,
+        Action<TracerProviderBuilder>? tracerProvider = null,
+        Action<MeterProviderBuilder>? meterProvider = null)
+    {
+        var resource = ResourceBuilder.CreateDefault()
+            .AddService(serviceName: serviceName, serviceInstanceId: Environment.MachineName);
+
+        loggerOptions ??= new Action<OpenTelemetryLoggerOptions>(options =>
+        {
+            options.SetResourceBuilder(resource);
+            options.AddOtlpExporter(otlpOptions);
+            options.ParseStateValues = true;
+            options.IncludeFormattedMessage = true;
+            options.IncludeScopes = true;
+            options.AddConsoleExporter();
+        });
+        tracerProvider ??= new Action<TracerProviderBuilder>(options =>
+        {
+            options.AddSource(serviceName)
+                .SetResourceBuilder(resource)
+                .AddHttpClientInstrumentation(options =>
+                {
+                    options.RecordException = true;
+                })
+                .AddAspNetCoreInstrumentation(options =>
+                {
+                    options.EnrichWithException = (activity, exception) =>
+                    {
+                        activity.SetTag("stackTrace", exception.StackTrace);
+                        activity.SetTag("message", exception.Message);
+                    };
+                })
+                .AddOtlpExporter(otlpOptions);
+        });
+
+        meterProvider = new Action<MeterProviderBuilder>(options =>
+        {
+            options.AddMeter(serviceName)
+                .SetResourceBuilder(resource)
+                .AddHttpClientInstrumentation()
+                .AddAspNetCoreInstrumentation()
+                .AddOtlpExporter(otlpOptions);
+        });
+        services.AddLogging(loggerBuilder =>
+        {
+            loggerBuilder.ClearProviders();
+            loggerBuilder.AddOpenTelemetry(loggerOptions);
+        });
+        services.AddOpenTelemetry()
+            .WithTracing(tracerProvider)
+            .WithMetrics(meterProvider)
+            ;
+        return services;
     }
 }

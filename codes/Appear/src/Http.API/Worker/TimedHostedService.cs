@@ -48,6 +48,7 @@ public class TimedHostedService(
     {
         using IServiceScope scope = Services.CreateScope();
         var userManager = scope.ServiceProvider.GetRequiredService<UserManager>();
+
         return Task.CompletedTask;
     }
 

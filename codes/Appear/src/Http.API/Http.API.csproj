@@ -29,7 +29,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\runtime\Appear.ServiceDefaults\Appear.ServiceDefaults.csproj" />
 		<ProjectReference Include="..\Application\Application.csproj" />
 		<ProjectReference Include="..\Modules\SystemMod\SystemMod.csproj" />
 	</ItemGroup>
