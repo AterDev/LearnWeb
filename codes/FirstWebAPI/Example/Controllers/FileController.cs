@@ -1,4 +1,5 @@
 using System.IO.Compression;
+
 using Microsoft.AspNetCore.Mvc;
 
 namespace Example.Controllers;
@@ -9,16 +10,33 @@ public class FileController(IWebHostEnvironment environment) : ControllerBase
 {
     private readonly IWebHostEnvironment _env = environment;
 
+    /// <summary>
+    /// 下载文件
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("download")]
+    public ActionResult<string> Download()
+    {
+        var filePath = @"D:\Downloads\NVIDIA_Broadcast_Offline_Ampere_v1.4.0.29.exe";
+        // read file stream and return
+        return PhysicalFile(filePath, "application/octet-stream", "N卡驱动.exe");
+    }
+
+    /// <summary>
+    /// 下载压缩
+    /// </summary>
+    /// <returns></returns>
     [HttpGet("stream")]
     public async Task DownloadStreamAsync()
     {
         Response.Headers.ContentDisposition = "attachment; filename=test.zip";
-        var filePath = @"D:\Downloads\VisualStudio.GitHub.Copilot.vsix";
+
+        var filePath = @"D:\Downloads\NVIDIA_Broadcast_Offline_Ampere_v1.4.0.29.exe";
+
         using (var archive = new ZipArchive(Response.BodyWriter.AsStream(), ZipArchiveMode.Create))
         {
             archive.CreateEntryFromFile(filePath, "test.vsix");
         }
-
         await Response.CompleteAsync();
     }
 
@@ -52,7 +70,7 @@ public class FileController(IWebHostEnvironment environment) : ControllerBase
                 return Problem("上传的图片应小于500KB");
             }
             // TODO:保存文件
-            var path = Path.Combine(_env.ContentRootPath, file.FileName);
+            var path = Path.Combine(_env.WebRootPath, file.FileName);
             using (var fileStream = System.IO.File.Create(path))
             {
                 await file.OpenReadStream().CopyToAsync(fileStream);
