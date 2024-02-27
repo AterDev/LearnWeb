@@ -1,5 +1,8 @@
 ﻿@inject IToastService ToastService
 @inject UserService _userService
+@inject Vote.Services.MessageService _msg
+@inject UserStateService _userState
+@inject NavigationManager Navigation
 
 @page "/login"
 @using ClientAPI.Models
@@ -25,7 +28,6 @@
     public string? UserName { get; set; }
     public string? Password { get; set; }
 
-
     private async Task Submit()
     {
         if (string.IsNullOrWhiteSpace(UserName) || string.IsNullOrWhiteSpace(Password))
@@ -40,7 +42,17 @@
                 Password = Password
             };
         var res = await _userService.LoginAsync(data);
+        if (res != null)
+        {
+            _msg.ShowSuccess("登录成功");
+            _userState.SetUserState(res.Id, res.Username);
+            _userService.AddBearerToken(res.Token);
 
-
+            Navigation.NavigateTo("/");
+        }
+        else
+        {
+            _msg.ShowError(_userService.ErrorMsg?.Title, _userService.ErrorMsg?.Detail);
+        }
     }
 }

@@ -3,7 +3,8 @@
 @inject UserStateService UserStateService
 
 <Router AppAssembly="@typeof(App).Assembly"
-        OnNavigateAsync="@OnNavigateAsync">
+        OnNavigateAsync="@OnNavigateAsync"
+        @rendermode="RenderMode.InteractiveWebAssembly">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
         <FocusOnNavigate RouteData="@routeData" Selector="h1" />
@@ -31,7 +32,7 @@
         {
             Logger.LogInformation(route);
         }
-        else
+        else if (!UserStateService.IsLogin)
         {
             Navigation.NavigateTo("/login");
         }

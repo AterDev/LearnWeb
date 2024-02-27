@@ -19,5 +19,6 @@ builder.Services.AddFluentUIComponents();
 builder.Services.AddBlazoredLocalStorageAsSingleton();
 
 builder.Services.AddSingleton<UserStateService>();
+builder.Services.AddScoped<Vote.Services.MessageService>();
 
 await builder.Build().RunAsync();

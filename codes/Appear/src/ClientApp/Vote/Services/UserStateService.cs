@@ -30,7 +30,7 @@ public class UserStateService
 
     public void GetUserState()
     {
-        var username = _storageService.GetItemAsString("UserName");
+        var username = _storageService.GetItem<string>("UserName");
         var userId = _storageService.GetItem<Guid>("UserId");
 
         if (userId != Guid.Empty && !string.IsNullOrWhiteSpace(username))
@@ -44,5 +44,8 @@ public class UserStateService
     public void ClearUserStateAsync()
     {
         _storageService.Clear();
+        UserId = Guid.Empty;         
+        UserName = null;
+        IsLogin = false;
     }
 }

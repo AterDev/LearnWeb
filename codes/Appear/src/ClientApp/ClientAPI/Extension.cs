@@ -28,7 +28,7 @@ public static class Extension
         return HttpPolicyExtensions
             .HandleTransientHttpError()
             .WaitAndRetryAsync(
-                6,
+                1,
                 retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)));
     }
 }

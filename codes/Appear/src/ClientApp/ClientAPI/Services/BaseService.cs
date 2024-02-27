@@ -21,8 +21,9 @@ public class BaseService
     /// </summary>
     /// <param name="name"></param>
     /// <param name="value"></param>
-    protected void SetHttpHeader(string name, string value)
+    public void SetHttpHeader(string name, string value)
     {
+        Http.DefaultRequestHeaders.Remove(name);
         Http.DefaultRequestHeaders.Add(name, value);
     }
 
@@ -30,7 +31,7 @@ public class BaseService
     /// add bearer token to header
     /// </summary>    
     /// <param name="token"></param>
-    protected void AddBearerToken(string token)
+    public void AddBearerToken(string token)
     {
         SetHttpHeader("Authorization", $"Bearer {token}");
     }
