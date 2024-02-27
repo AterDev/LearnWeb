@@ -1,10 +1,12 @@
 ﻿@inject IToastService ToastService
+@inject UserService _userService
 
 @page "/login"
+@using ClientAPI.Models
 <div class="flex items-center justify-center h-screen bg-gray-200">
     <div class="bg-white p-16 rounded shadow-2xl w-2/3">
         <h2 class="text-3xl font-bold mb-10 text-gray-800">登录到您的账户</h2>
-        <form class="space-y-5"  @onsubmit="Submit">
+        <form class="space-y-5" @onsubmit="Submit">
             <div>
                 <label class="block mb-1 font-bold text-gray-500">用户名</label>
                 <input type="text" @bind="UserName" class="w-full border-2 border-gray-200 p-3 rounded outline-none focus:border-purple-500" placeholder="请输入您的用户名">
@@ -24,13 +26,20 @@
     public string? Password { get; set; }
 
 
-    private void Submit()
+    private async Task Submit()
     {
         if (string.IsNullOrWhiteSpace(UserName) || string.IsNullOrWhiteSpace(Password))
         {
             ToastService.ShowError("用户名或密码不能为空");
             return;
         };
+
+        var data = new LoginDto
+            {
+                UserName = UserName,
+                Password = Password
+            };
+        var res = await _userService.LoginAsync(data);
 
 
     }
