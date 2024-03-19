@@ -8,15 +8,13 @@ public class BaseTest : IClassFixture<WebApplicationFactory<Program>>
     public BaseTest(WebApplicationFactory<Program> factory)
     {
         factory = factory.WithWebHostBuilder(builder =>
-          {
-              builder.ConfigureServices(services =>
-              {
-                  // your test database
-                  //var connectionString = "";
-                  //services.AddDbContextPool<QueryDbContext>(option => option.UseNpgsql(connectionString));
-                  //services.AddDbContextPool<CommandDbContext>(option => option.UseNpgsql(connectionString));
-              });
-          });
+        {
+            builder.ConfigureServices(services =>
+            {
+                // 自定义服务集合
+            });
+            builder.UseEnvironment("Test");
+        });
         Services = factory.Services.CreateScope().ServiceProvider;
     }
 }

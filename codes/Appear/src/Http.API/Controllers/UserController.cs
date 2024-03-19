@@ -225,7 +225,10 @@ public class UserController(
     public async Task<ActionResult<User?>> UpdateAsync(UserUpdateDto dto)
     {
         User? current = await manager.GetCurrentAsync(_user.UserId);
-        if (current == null) { return NotFound(ErrorMsg.NotFoundResource); };
+        if (current == null)
+        {
+            return NotFound(ErrorMsg.NotFoundResource);
+        };
         return await manager.UpdateAsync(current, dto);
     }
 

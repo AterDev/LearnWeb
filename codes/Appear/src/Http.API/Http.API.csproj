@@ -34,6 +34,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<InternalsVisibleTo Include="API.Test" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <Folder Include="Infrastructure\" />
 	</ItemGroup>
 </Project>
