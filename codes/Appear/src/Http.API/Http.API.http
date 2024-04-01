@@ -1,10 +1,11 @@
 ﻿@Http.API_HostAddress = http://localhost:5002
 
-PUT {{Http.API_HostAddress}}/api/user/login
+PUT {{Http.API_HostAddress}}/api/admin/SystemUser/login
 Content-Type: application/json
 
 {
-  //LoginDto
+"UserName": "admin",
+"Password": "Hello.Net"
 }
 
 ###

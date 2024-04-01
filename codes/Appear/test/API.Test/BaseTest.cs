@@ -1,5 +1,7 @@
 ﻿using System.Net.Http.Headers;
+
 using Microsoft.AspNetCore.Mvc.Testing;
+
 using Share.Models.UserDtos;
 
 namespace API.Test;
@@ -12,13 +14,13 @@ public class BaseTest : IClassFixture<WebApplicationFactory<Program>>
     public BaseTest(WebApplicationFactory<Program> factory)
     {
         factory = factory.WithWebHostBuilder(builder =>
-          {
-              builder.ConfigureServices(services =>
-              {
-                  // 自定义服务集合
-              });
-              builder.UseEnvironment("Development");
-          });
+        {
+            builder.ConfigureServices(services =>
+            {
+                // 自定义服务集合
+            });
+            builder.UseEnvironment("Development");
+        });
 
         Services = factory.Services.CreateScope().ServiceProvider;
         _client = factory.CreateClient();

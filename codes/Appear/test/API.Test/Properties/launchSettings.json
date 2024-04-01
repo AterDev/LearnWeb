@@ -1,12 +1,12 @@
 {
   "profiles": {
-    "API": {
+    "API.Test": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:53294;http://localhost:53295"
+      "applicationUrl": "https://localhost:9021;http://localhost:9022"
     }
   }
 }
