@@ -140,7 +140,6 @@ public static partial class AppServiceCollectionExtensions
             options.ParseStateValues = true;
             options.IncludeFormattedMessage = true;
             options.IncludeScopes = true;
-            options.AddConsoleExporter();
         });
         tracerProvider ??= new Action<TracerProviderBuilder>(options =>
         {
@@ -171,7 +170,7 @@ public static partial class AppServiceCollectionExtensions
         });
         services.AddLogging(loggerBuilder =>
         {
-            loggerBuilder.ClearProviders();
+            //loggerBuilder.ClearProviders();
             loggerBuilder.AddOpenTelemetry(loggerOptions);
         });
         services.AddOpenTelemetry()

@@ -40,16 +40,14 @@ public static class ServiceCollectionExtension
         .AddJwtBearer(cfg =>
         {
             cfg.SaveToken = true;
-            var sign = configuration.GetSection("Authentication")["Jwt:Sign"];
-            if (string.IsNullOrEmpty(sign))
-            {
-                throw new Exception("未找到有效的Jwt配置");
-            }
+            var jwtOption = configuration.GetSection("Authentication:Jwt").Get<JwtOption>()
+            ?? throw new ArgumentNullException("未找到Jwt选项!");
+
             cfg.TokenValidationParameters = new TokenValidationParameters()
             {
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(sign)),
-                ValidIssuer = configuration.GetSection("Authentication")["Jwt:ValidIssuer"],
-                ValidAudience = configuration.GetSection("Authentication")["Jwt:ValidAudiences"],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOption.Sign)),
+                ValidIssuer = jwtOption.ValidIssuer,
+                ValidAudience = jwtOption.ValidAudiences,
                 ValidateIssuer = true,
                 ValidateLifetime = true,
                 RequireExpirationTime = true,
