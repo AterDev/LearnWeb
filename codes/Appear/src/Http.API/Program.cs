@@ -30,6 +30,8 @@ services.AddSystemModManagers();
 services.AddSingleton(typeof(CacheService));
 services.AddSingleton<IEmailService, EmailService>();
 
+services.AddHealthChecks();
+
 services.AddControllers()
     .ConfigureApiBehaviorOptions(o =>
     {
@@ -58,11 +60,11 @@ if (app.Environment.IsDevelopment())
 else
 {
     app.UseCors("default");
-    //app.UseHsts();
-    app.UseHttpsRedirection();
+    //app.UseHttpsRedirection();
 }
 
 app.UseStaticFiles();
+app.UseHealthChecks("/health");
 // 异常统一处理
 app.UseExceptionHandler(ExceptionHandler.Handler());
 app.UseRouting();
