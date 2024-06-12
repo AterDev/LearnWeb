@@ -1,0 +1,13 @@
+<mxfile host="65bd71144e">
+    <diagram id="Dvk_ws1AAhhGtIZoi0I5" name="Page-1">
+        <mxGraphModel dx="1740" dy="801" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="4" value="基础技能：&lt;br&gt;键盘熟练度&lt;br&gt;电脑熟练度&lt;br&gt;基本英语单词&lt;br&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="80" y="35" width="128" height="76" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
