@@ -1,65 +1,82 @@
-﻿
-int[] unsortedArray = [5, 3, 8, 4, 2, 7, 9, 1, 6];
-int[] sortedArray = TreeSort(unsortedArray);
-Console.WriteLine("原数组: " + string.Join(", ", unsortedArray));
-Console.WriteLine("排序后: " + string.Join(", ", sortedArray));
-
-static int[] TreeSort(int[] array)
+﻿/// <summary>
+/// 个人
+/// </summary>
+public class Person
 {
-    // 默认根节点为空
-    TreeNode? root = null;
-    // 构建二叉搜索树
-    foreach (int value in array)
-    {
-        root = Insert(root, value);
-    }
-
-    // 中序遍历二叉搜索树并获取排序后的元素
-    List<int> sortedList = [];
-    InOrderTraversal(root, sortedList);
-    return sortedList.ToArray();
+    /// <summary>
+    /// 姓名
+    /// </summary>
+    public required string Name { get; set; }
+    /// <summary>
+    /// 年龄
+    /// </summary>
+    public int Age { get; set; }
+    /// <summary>
+    /// 存款
+    /// </summary>
+    public decimal Money { get; set; }
 }
 
-
-// 从节点node开始，插入值value
-static TreeNode Insert(TreeNode? node, int value)
+/// <summary>
+/// 男人
+/// </summary>
+public class Man : Person, IMan, IWorker, IFather, IHusband
 {
-    // 节点为空时，插入新节点
-    if (node == null)
-        return new TreeNode(value);
+    public void BuyBagsForWife()
+    {
+        Console.WriteLine("为妻子买包");
+    }
 
-    // 小于当前节点值时，插入左子树
-    if (value < node.Value)
+    public void EarnMoney()
     {
-        node.Left = Insert(node.Left, value);
+        Console.WriteLine("挣钱");
     }
-    // 大于等于当前节点值时，插入右子树
-    else
+
+    public void RaiseChildren()
     {
-        node.Right = Insert(node.Right, value);
+        Console.WriteLine("养小孩");
     }
-    return node;
+
+    public void Work()
+    {
+        Console.WriteLine("打工");
+    }
 }
 
-// 搜索node节点下最小值
-static void InOrderTraversal(TreeNode? node, List<int> result)
+/// <summary>
+/// 男人
+/// </summary>
+public interface IMan
 {
-    if (node == null)
-        return;
-
-    // 遍历搜索左子树
-    InOrderTraversal(node.Left, result);
-    result.Add(node.Value);
-    // 遍历搜索右子树
-    InOrderTraversal(node.Right, result);
+    /// <summary>
+    /// 挣钱
+    /// </summary>
+    void EarnMoney();
 }
-
-// 定义树型结构
-public class TreeNode(int value)
+/// <summary>
+/// 打工人
+/// </summary>
+public interface IWorker
 {
-    public int Value = value;
-    // 左子树
-    public TreeNode? Left = null;
-    // 右子树
-    public TreeNode? Right = null;
+    void Work();
+}
+/// <summary>
+/// 父亲
+/// </summary>
+public interface IFather
+{
+    /// <summary>
+    /// 养小孩
+    /// </summary>
+    void RaiseChildren();
+}
+/// <summary>
+/// 丈夫
+/// </summary>
+public interface IHusband
+{
+    /// <summary>
+    /// 为妻子买包
+    /// </summary>
+    void BuyBagsForWife();
 }
