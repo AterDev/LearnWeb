@@ -1,22 +1,10 @@
-﻿// 模拟日志数据
-LogHelper.Write("启动程序");
-LogHelper.Write("运行程序");
-for (int i = 0; i < 100; i++)
-{
-    if (i % 13 == 0)
-    {
-        LogHelper.Write("异常情况：" + i);
-    }
-    else
-    {
-        LogHelper.Write("正常日志：" + i);
-    }
-}
-LogHelper.Write("结束程序");
+﻿using System.IO.Compression;
 
-// 读取异常
-var date = DateTime.Now.ToString("yyyy-MM-dd");
-var logPath = Path.Combine("logs", date + ".log");
+string targetPath = @"d:\images";
+string zipPath = @"d:\images.zip";
+string unzipPath = @"d:\unzip";
+// 直接使用静态方法，将目录压缩为zip文件
+ZipFile.CreateFromDirectory(targetPath, zipPath);
 
-LogHelper.GetExceptionMessage(logPath)
-    .ForEach(Console.WriteLine);
+// 使用静态方法，解压文件到指定目录
+ZipFile.ExtractToDirectory(zipPath, unzipPath);
