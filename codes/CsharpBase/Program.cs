@@ -1,11 +1,13 @@
-﻿var p1 = new SocketHelper("p1", 10001);
-var p2 = new SocketHelper("p2", 10002);
-
+﻿var httpServer = new SocketHelper("httpServer", 8080);
 // p2作为服务端，先启动
-var p2Task = Task.Run(() => p2.StartRun());
-await Task.Delay(1000);
-// p1作为客户端，连接p2
-var p1Task = Task.Run(() => p1.StartRun(10002));
+var p2Task = Task.Run(() => httpServer.StartHttpServer());
+await Task.Delay(500);
 
+var http = new HttpHelper("http://localhost:8080");
+await http.GetTest();
 
-Task.WaitAll(p2Task, p1Task);
+await Task.Delay(500);
+
+await http.PostTest();
+
+Task.WaitAll(p2Task);

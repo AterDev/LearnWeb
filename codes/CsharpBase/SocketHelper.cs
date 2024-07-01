@@ -57,6 +57,32 @@ public class SocketHelper
             }
         }
     }
+
+    /// <summary>
+    /// 启动http服务
+    /// </summary>
+    public void StartHttpServer()
+    {
+        Socket.Bind(new IPEndPoint(IPAddress.Any, Port));
+        // 监听
+        Socket.Listen(10);
+        Output($"开始监听：" + Port);
+        while (true)
+        {
+            var client = Socket.Accept();
+            Output("新连接建立：" + client.RemoteEndPoint?.ToString());
+            var buffer = new byte[1024];
+            var received = client.Receive(buffer);
+            var data = Encoding.UTF8.GetString(buffer, 0, received);
+            Output("收到数据：" + data);
+
+            var response = "HTTP/1.1 200 OK\r\nContent-Length: 0\r\n\r\n";
+            client.Send(Encoding.UTF8.GetBytes(response));
+            client.Shutdown(SocketShutdown.Both);
+
+            client.Close();
+        }
+    }
     private void Output(string msg)
     {
         Console.WriteLine($"[{Name}]: {msg}");
