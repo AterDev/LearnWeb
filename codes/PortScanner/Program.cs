@@ -1,15 +1,34 @@
 ﻿using System.Net;
+using System.Text;
 using PortScanner;
 
-string ip = "110.42.161.183";
+if (args.Length == 0)
+{
+    Console.WriteLine("请输入IP地址");
+    return;
+}
+string ip = args[0];
 if (IPAddress.TryParse(ip, out var ipAddress))
 {
-    Console.WriteLine("开始扫描ip:" + ip);
-    var helper = new ScannerHelper(ipAddress, 20, 10000);
+    try
+    {
+        var startPort = args.Length > 1 ? int.Parse(args[1]) : 1;
+        var endPort = args.Length > 2 ? int.Parse(args[2]) : 80;
+        Console.WriteLine("开始扫描ip:" + ip);
+        var helper = new ScannerHelper(ipAddress, startPort, endPort);
+        var ports = helper.ScanPortsTask();
+        Console.WriteLine("扫描完成");
 
-    var ports = helper.ScanPortsTaskAsync();
-
-    Console.WriteLine("扫描完成");
+        if (ports.Count > 0)
+        {
+            var content = string.Join(Environment.NewLine, ports);
+            await File.WriteAllTextAsync("./result.txt", content, Encoding.UTF8);
+        }
+    }
+    catch (FormatException)
+    {
+        Console.WriteLine("请输入正确的端口");
+    }
 }
 else
 {

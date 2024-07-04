@@ -40,7 +40,7 @@ public class ScannerHelper(IPAddress ip, int startPort, int endPort)
         return openPorts;
     }
 
-    public List<int> ScanPortsTaskAsync()
+    public List<int> ScanPortsTask()
     {
         var openPorts = new ConcurrentBag<int>();
         var ports = Enumerable.Range(StartPort, EndPort - StartPort + 1);
