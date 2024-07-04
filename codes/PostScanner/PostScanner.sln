@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsApp", "WinFormsApp\WinFormsApp.csproj", "{2A47A7C3-BC49-4FFA-8932-0F68CB3F51B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScannerLib", "ScannerLib\ScannerLib.csproj", "{2E5E09D3-F8B9-4395-BA04-3655A38D952F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp", "WpfApp\WpfApp.csproj", "{4D9154E1-9AFD-4456-BA08-75709E5D7F2F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2A47A7C3-BC49-4FFA-8932-0F68CB3F51B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A47A7C3-BC49-4FFA-8932-0F68CB3F51B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A47A7C3-BC49-4FFA-8932-0F68CB3F51B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A47A7C3-BC49-4FFA-8932-0F68CB3F51B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E5E09D3-F8B9-4395-BA04-3655A38D952F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E5E09D3-F8B9-4395-BA04-3655A38D952F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E5E09D3-F8B9-4395-BA04-3655A38D952F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E5E09D3-F8B9-4395-BA04-3655A38D952F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D9154E1-9AFD-4456-BA08-75709E5D7F2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D9154E1-9AFD-4456-BA08-75709E5D7F2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D9154E1-9AFD-4456-BA08-75709E5D7F2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D9154E1-9AFD-4456-BA08-75709E5D7F2F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {74E5B841-B2A1-445C-BB55-41508523544D}
+	EndGlobalSection
+EndGlobal

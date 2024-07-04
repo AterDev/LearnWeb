@@ -1,0 +1,78 @@
+﻿<Window
+    x:Class="WpfApp.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:WpfApp"
+    mc:Ignorable="d"
+    Title="MainWindow"
+    Height="220"
+    Width="580">
+    <StackPanel
+        Height="200"
+        Width="540"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Orientation="Vertical">
+        <StackPanel
+            Margin="8"
+            Orientation="Horizontal"
+            HorizontalAlignment="Left">
+            <!--ip-->
+            <StackPanel
+                Orientation="Vertical">
+                <TextBlock
+                    Text="IP地址">
+                </TextBlock>
+                <TextBox
+                    x:Name="IPBox"
+                    TextWrapping="Wrap"
+                    Height="30"
+                    Width="120" />
+            </StackPanel>
+            <!--开始端口-->
+            <StackPanel
+                Margin="8,0,0,0"
+                Orientation="Vertical">
+                <TextBlock
+                    Text="开始端口">
+                </TextBlock>
+
+                <TextBox
+                    x:Name="startBox"
+                    TextWrapping="Wrap"
+                    Height="30"
+                    Width="120" />
+            </StackPanel>
+            <!--结束端口-->
+            <StackPanel
+                Margin="8,0,0,0"
+                Orientation="Vertical">
+                <TextBlock
+                    Text="结束端口">
+                </TextBlock>
+
+                <TextBox
+                    x:Name="endBox"
+                    TextWrapping="Wrap"
+                    Height="30"
+                    Width="120" />
+            </StackPanel>
+            <Button
+                Margin="8,14,0,0"
+                x:Name="scanBtn"
+                Content="扫描"
+                Height="30"
+                Width="120"
+                Click="scanBtn_ClickAsync">
+            </Button>
+        </StackPanel>
+        <StackPanel>
+            <TextBox
+                x:Name="resultBox"
+                Width="520"
+                Height="120" />
+        </StackPanel>
+    </StackPanel>
+</Window>
