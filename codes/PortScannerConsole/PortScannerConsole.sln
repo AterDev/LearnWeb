@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PortScanner", "PortScanner.csproj", "{C8A64471-CFD1-4133-9030-97E6282FE46A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PortScanner", "PortScanner.csproj", "{4AFBA3AD-9341-4671-BCF4-DEEDB6B01897}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C8A64471-CFD1-4133-9030-97E6282FE46A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C8A64471-CFD1-4133-9030-97E6282FE46A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C8A64471-CFD1-4133-9030-97E6282FE46A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C8A64471-CFD1-4133-9030-97E6282FE46A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AFBA3AD-9341-4671-BCF4-DEEDB6B01897}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AFBA3AD-9341-4671-BCF4-DEEDB6B01897}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AFBA3AD-9341-4671-BCF4-DEEDB6B01897}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AFBA3AD-9341-4671-BCF4-DEEDB6B01897}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {7516E954-ECC2-4486-B1A6-FBD63742078E}
+		SolutionGuid = {44A25938-3CEE-4B1A-A49C-0E4E766D1EF9}
 	EndGlobalSection
 EndGlobal
