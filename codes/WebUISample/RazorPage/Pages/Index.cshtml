@@ -1,0 +1,22 @@
+﻿@page
+@model IndexModel
+<div class="container p-0">
+    <div class="d-flex gap-2">
+        <div class="col-6">
+            @* 用户录入 *@
+            <form asp-action="Index" method="post">
+                <textarea class="form-control" placeholder="写下您的记录" rows="5" name="content"></textarea>
+                <button type="submit" class="btn btn-primary">保存</button>
+            </form>
+        </div>
+        <div class="col-6">
+            @* 内容展示 *@
+            <div class="d-flex flex-column">
+                @foreach (var item in Model.Notes)
+                {
+                    <pre style="border:1px solid gray;padding:8px">@item</pre>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+﻿@page "/"
+<PageTitle>Home</PageTitle>
+<div class="container p-0">
+    <div class="d-flex gap-2">
+        <div class="col-6">
+            @* 用户录入 *@
+            <textarea class="form-control" placeholder="写下您的记录" rows="5" @bind="Content"></textarea>
+            <button class="btn btn-primary" @onclick="AddNote">保存</button>
+        </div>
+        <div class="col-6">
+            @* 内容展示 *@
+            <div class="d-flex flex-column">
+                @foreach (var item in Notes)
+                {
+                    <pre style="border:1px solid gray;padding:8px">@item</pre>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@code {
+    public List<string> Notes { get; set; } = [];
+    public string Content { get; set; } = "";
+
+    void AddNote()
+    {
+        Notes.Add(Content);
+        Content = "";
+    }
+}
