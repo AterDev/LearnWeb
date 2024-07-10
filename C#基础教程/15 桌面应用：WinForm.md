@@ -22,7 +22,7 @@
 
 最终我们会看到类似内容:
 
-![WinForm](../images/csharpBase/WinForm1.png)
+![WinForm](../images/csharpBase/winform1.png)
 
 ### 通过程序集复用逻辑代码
 
