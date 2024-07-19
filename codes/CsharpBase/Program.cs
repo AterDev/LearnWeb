@@ -1,12 +1,12 @@
-﻿var httpServer = new SocketHelper("httpServer", 8080);
-var httpTask = Task.Run(() => httpServer.StartHttpServer());
-await Task.Delay(500);
+﻿
+string a = "hello";
 
-var http = new HttpHelper("http://localhost:8080");
-await http.GetTest();
+System.Console.WriteLine(a.GetHashCode());
 
-await Task.Delay(500);
+string b = "hello";
 
-await http.PostTest();
+System.Console.WriteLine(b.GetHashCode());
 
-Task.WaitAll(httpTask);
+a = "hello world";
+System.Console.WriteLine(a.GetHashCode());
+
