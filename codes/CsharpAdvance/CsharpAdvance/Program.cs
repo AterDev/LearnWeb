@@ -1,4 +1,6 @@
-﻿#region 类的成员
+﻿using CsharpAdvance;
+
+#region 类的成员
 //var person = new Person("张三")
 //{
 //    Birthday = new DateTimeOffset(1990, 1, 1, 0, 0, 0, TimeSpan.Zero)
@@ -26,12 +28,17 @@
 #endregion
 
 #region NullableExample
-using CsharpAdvance;
 
-NullableExample.Model model = null;
-var name = model?.Name ?? "未知";
-Console.WriteLine(name);
+//NullableExample.Model model = null;
+//var name = model?.Name ?? "未知";
+//Console.WriteLine(name);
 
-NullableExample.Test();
+//NullableExample.Test();
+
+#endregion
+
+#region GenericCollection
+
+GenericCollection.DictionaryExample();
 
 #endregion
