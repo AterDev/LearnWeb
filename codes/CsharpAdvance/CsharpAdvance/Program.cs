@@ -51,3 +51,11 @@
 #region 预处理指令
 
 #endregion
+
+#region 特性
+
+var attr = new AttributeExample { Name = "特性" };
+attr.SetNewName("新特性名称");
+
+
+#endregion
