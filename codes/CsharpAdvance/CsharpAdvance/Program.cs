@@ -1,6 +1,4 @@
-﻿using CsharpAdvance;
-
-#region 类的成员
+﻿#region 类的成员
 //var person = new Person("张三")
 //{
 //    Birthday = new DateTimeOffset(1990, 1, 1, 0, 0, 0, TimeSpan.Zero)
@@ -17,7 +15,6 @@
 
 #endregion
 
-
 #region StringExample
 
 //StringExample.NormalString();
@@ -27,7 +24,7 @@
 
 #endregion
 
-#region NullableExample
+#region 空值处理
 
 //NullableExample.Model model = null;
 //var name = model?.Name ?? "未知";
@@ -37,8 +34,20 @@
 
 #endregion
 
-#region GenericCollection
+#region 集合表达式
 
-GenericCollection.DictionaryExample();
+//GenericCollection.DictionaryExample();
+//GenericCollection.InlineExample();
+
+#endregion
+
+#region 类型别名
+
+//TypeAlias.Test();
+//任意类型别名.演示输出();
+
+#endregion
+
+#region 预处理指令
 
 #endregion

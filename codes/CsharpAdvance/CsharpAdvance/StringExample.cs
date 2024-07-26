@@ -1,4 +1,7 @@
 ﻿namespace CsharpAdvance;
+/// <summary>
+/// 字符串示例
+/// </summary>
 public class StringExample
 {
 
