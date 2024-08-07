@@ -43,3 +43,10 @@ global using CsharpAdvance.Models;
 ```
 
 这样，任何文件使用`CsharpAdvance.Models`命名空间的类时，都不需要再添加`using`指令。
+
+## 总结
+
+全局引用(global using)
+
+- 减少重复的引用，即减少了代码行数，也减少了开发负担。
+- 更方便代码重构
