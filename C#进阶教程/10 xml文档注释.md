@@ -119,12 +119,29 @@ public class Cat : Animal
 }
 ```
 
-### 生成文档文件
+## 生成文档
 
 我们演示了几种最常见的注释的使用方法和场景，更多更详细的用法，请查看[官方文档](https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/xmldoc/recommended-tags).
 
-生成文档
+通常对于一个项目，注释的行数占比是很大的，甚至是超过代码的行数，但这些注释对于代码运行没有任何作用，在程序编译时，去移除这些注释，能显著减少程序体积。
 
-使用DoxFX生成文档
+.NET提供了一种方式将所有的`xml注释`生成一个文件，以便提供给其他工具使用。
+
+### 生成文档文件
+
+在项目配置中，找到构建中的输出选择，选择生成`XML文档文件`，或者直接在`.csproj`中添加
+
+```xml
+<PropertyGroup>
+    <!-- ... -->
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+</PropertyGroup>
+```
+
+这样在构建时，我们就会看到生成的`xml`文件了，那么其他的工具就可以使用这个文件来进一步生成文档了。
+
+### 使用DoxFX生成文档
+
+想必大家都看过微软的官方文档，.NET SDK为开发者提供了丰富的功能，我们除了使用IDE的提示来了解相关类的使用
 
 生成Swagger

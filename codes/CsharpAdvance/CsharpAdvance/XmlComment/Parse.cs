@@ -33,8 +33,6 @@ internal class Parse
     }
 }
 
-
-
 public interface IAnimal
 {
     /// <summary>
