@@ -140,8 +140,90 @@ public class Cat : Animal
 
 这样在构建时，我们就会看到生成的`xml`文件了，那么其他的工具就可以使用这个文件来进一步生成文档了。
 
-### 使用DoxFX生成文档
+## 使用DocFX生成文档
 
-想必大家都看过微软的官方文档，.NET SDK为开发者提供了丰富的功能，我们除了使用IDE的提示来了解相关类的使用
+想必大家都看过微软的官方文档，.NET SDK为开发者提供了丰富的功能，我们除了使用IDE的提示来了解相关类方法的使用，还可以通过官方文档更加详细的了解使用细节。要想维护多个版本的文档，全部手动重新编写是非常繁琐的，尤其是很多内容是已经在代码注释中写好的。
 
-生成Swagger
+如果我们自己编写了一个类库，那么我们也希望其他人在不使用的情况下就能通过文档了解我们程序中的方法和类的使用，这时我们就可以使用`DocFX`来生成文档。
+
+`DocFX`是一个开源的文档生成工具，现已成为.NET基金会项目，它可以通过代码注释生成文档。
+
+我们将使用它演示，将我们的程序集生成文档网站。
+
+### 安装该工具
+
+```pwsh
+dotnet tool install -g docfx
+```
+
+### 初始化项目
+
+我们可以先创建一个`docs`文件夹用来存放文档，在该目录下执行:
+
+```pwsh
+docfx init 
+```
+
+根据提示，输出相关的内容，如:
+
+```pwsh
+Name (mysite): AdvanceExample
+Generate .NET API documentation? [y/n] (y): y
+.NET projects location (src): CsharpAdvance
+Markdown docs location (docs): docs
+Enable site search? [y/n] (y): y
+Enable PDF? [y/n] (y): n
+```
+
+这时我们会看到生成了配置文件`docfx.json`.
+
+然后我们执行`docfx`命令，等待执行完成，这样我们就生成了文档，然后我们可以通过以下命令来预览：
+
+```pwsh
+docfx .\docfx.json --serve
+```
+
+打开链接，找到API文档，然后找到命名空间`CsharpAdvance.XmlComment`，查看`Parse`类，我们可以看到，我们之前在代码中写的注释，都以某种方式显示在页面当中了。
+
+> [!TIP]
+> docFX还包含其他功能，如生成PDF文档，生成静态网站等，更多功能请查看[官方文档](https://dotnet.github.io/docfx/)
+
+## Swagger生成接口文档
+
+在Web API开发中，我们可以使用`Swagger`来生成接口文档，同时通过`Swagger UI`来测试接口。`Swagger`同样可以通过读取`xml`文档来生成更多的信息，方便查看。
+
+### 创建项目
+
+我们可以创建一个`ASP.NET Core WebAPI`项目，如命名为`SwaggerExample`，选中`启用OpenAPI`支持。
+
+现在我们使用`dotnet watch run`命令来运行项目，项目会自动打开浏览器窗口，展示`swagger UI`页面，如：
+
+![swagger](../images/csharpAdvance/swagger1.png)
+
+### 添加XML文档信息
+
+接下来，我们让swagger 可以读取并使用我们的`xml`文档。
+
+1. 在项目文件`.csproj`里添加`<GenerateDocumentationFile>True</GenerateDocumentationFile>`以启用xml文档的生成。
+2. 修改`Program.cs`中`builder.Services.AddSwaggerGen()`为以下内容：
+
+    ```csharp
+    builder.Services.AddSwaggerGen(options =>
+    {
+        var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+        var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+        options.IncludeXmlComments(xmlPath, true);
+    
+    });
+    ```
+
+3. 为控制器、方法以及类型添加xml注释内容。
+4. 重新运行程序，再次查看swagger页面，它将显示以下内容：
+
+    ![swagger2](../images/csharpAdvance/swagger2.png)
+
+## 总结
+
+C#中提供使用`XML`这种强大且`通用`的文本标记方式来编写注释，同时可以将它生成独立的文件，这样我们就可以将该文件进行保存和传播，提供给其他工具使用。
+
+在实际开发过程中，尽可能的编写注释代码，可以不全面，但尽可能要有。

@@ -3,7 +3,7 @@
 /// <summary>
 /// Pasre xml
 /// </summary>
-internal class Parse
+public class Parse
 {
     /// <summary>
     /// 解析算法实现
