@@ -1,5 +1,8 @@
 ﻿namespace CsharpAdvance;
 
+/// <summary>
+/// 集合表达式
+/// </summary>
 public class GenericCollection
 {
 

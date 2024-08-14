@@ -4,7 +4,9 @@
 /// </summary>
 public class StringExample
 {
-
+    /// <summary>
+    /// 字符串
+    /// </summary>
     public static void NormalString()
     {
         var path = "c:\\for\\bar.txt";
@@ -15,6 +17,10 @@ public class StringExample
         Console.WriteLine(sentence);
         Console.WriteLine(dialog);
     }
+
+    /// <summary>
+    /// 转义字符串
+    /// </summary>
     public static void EscapingString()
     {
         var path = @"c:\for\bar.txt";
@@ -26,6 +32,9 @@ public class StringExample
         Console.WriteLine(dialog);
     }
 
+    /// <summary>
+    /// 插值表达式
+    /// </summary>
     public static void InterpolationString()
     {
         var fileName = "bar.txt";
@@ -38,6 +47,9 @@ public class StringExample
         Console.WriteLine("path2:{0}", path2);
     }
 
+    /// <summary>
+    /// 原样字符串
+    /// </summary>
     public static void RawString()
     {
         var fileName = "bar.txt";

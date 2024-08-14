@@ -54,8 +54,39 @@
 
 #region 特性
 
-var attr = new AttributeExample { Name = "特性" };
-attr.SetNewName("新特性名称");
+//var attr = new AttributeExample { Name = "特性" };
+//attr.SetNewName("新特性名称");
+
+#endregion
+
+#region XML注释
+
+//Parse.ParseXml("");
+
+#endregion
+
+#region 分部类和方法
+
+//var partial = new PartialClass(10, 20);
+
+//Console.WriteLine($"周长为{partial.Length}");
+//Console.WriteLine($"面积为{partial.Area}");
+#endregion
+
+#region 扩展方法
+Console.WriteLine(string.IsNullOrEmpty("   ")); // false
+Console.WriteLine(string.IsNullOrWhiteSpace("   ")); // true
 
 
+string? str = null;
+
+if (!string.IsNullOrWhiteSpace(str))
+{
+    Console.WriteLine(str.Length);
+}
+
+if (str.IsNotEmpty())
+{
+    Console.WriteLine(str.ToLower());
+}
 #endregion

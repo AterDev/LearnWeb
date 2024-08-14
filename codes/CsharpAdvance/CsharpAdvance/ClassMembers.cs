@@ -1,4 +1,7 @@
 ﻿namespace CsharpAdvance;
+/// <summary>
+/// 类的成员
+/// </summary>
 public class ClassMembers
 {
 
