@@ -6,10 +6,9 @@ namespace CsharpAdvance;
 /// </summary>
 public class ExtensionMethodExample
 {
-
 }
 
-/// <summary>
+/// <summary> 
 /// 扩展方法
 /// </summary>
 public static class StringExtension
